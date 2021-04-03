@@ -74,3 +74,14 @@ async function getJoke(firstName, lastName) {
 
 getJoke('Matt', 'Dillon')
 
+async function getUsers () {
+    const res = await axios.get('https://reqres.in/api/users?page=2')
+    console.log(res);
+}
+
+
+async function createUser () {
+    const res = await axios.post('https://reqres.in/api/users?page=2')
+    console.log(res);
+}
+
