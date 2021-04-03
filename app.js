@@ -36,3 +36,31 @@ function makeLaunchLI(launch) {
 
 const btn = document.querySelector("#getLaunches");
 btn.addEventListener("click", getLaunches);
+
+async function getRandomDog() {
+  const dog = await axios.get("https://dog.ceo/api/breeds/image/random");
+  console.log(dog);
+  const image = document.querySelector("#dog");
+  image.src = dog.data.message;
+}
+
+async function getDogByBreed(breed) {
+  try {
+    const url = `https://dog.ceo/api/breed/${breed}/images/random`;
+    const res = await axios.get(url);
+    console.log(res);
+    const image = document.querySelector("#dog");
+    image.src = res.data.message;
+  } catch (e) {
+    alert("breed not found, but enjoy this random dog.");
+    getRandomDog();
+  }
+}
+
+const form = document.querySelector("#searchForm");
+const input = document.querySelector("#search");
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  getDogByBreed(input.value);
+  input.value = "";
+});
